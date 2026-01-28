@@ -1,0 +1,28 @@
+{
+  "summary": [
+    "user_id",
+    "first_name_th",
+    "last_name_th",
+    "citizen_id_last4"
+  ],
+  "full": [
+    "user_id",
+    "citizen_id",
+    "prefix_name_th",
+    "first_name_th",
+    "last_name_th",
+    "prefix_name_eng",
+    "first_name_en",
+    "last_name_en",
+    "birthday",
+    "religion",
+    "address_rest",
+    "sub_district_th",
+    "district_th",
+    "province_th",
+    "issue_date",
+    "expiry_date",
+    "created_at",
+    "updated_at"
+  ]
+}

@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+python-multipart
+pydantic-settings
+sqlalchemy
+psycopg[binary]
+psycopg2-binary
+paddlepaddle==3.2.2
+paddleocr
+opencv-python
+numpy
+rapidfuzz
