@@ -15,12 +15,12 @@ def root():
 
 @router.post("/process/{doc_type}")
 async def ocr_parts(doc_type: str ,
-                    images: List[UploadFile] = File(...),
+                    image: UploadFile = File(...)
                     ):
 
     try :
         
-        data = await service_ocr.process_document(doc_type,images)
+        data = await service_ocr.process_document(doc_type,image)
 
         return {
             "status" : True,

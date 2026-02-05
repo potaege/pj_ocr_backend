@@ -55,3 +55,68 @@ def create_document(
         "status": False,
         "message": str(e)
     }
+
+
+@router.get("/get_all_document/{user_id}")
+def get_all_document(
+    user_id :int, 
+    db: Session = Depends(get_db)):
+    try:
+   
+        data = service_document.get_all_document(db,user_id)
+       
+
+        return {
+            "success": True,
+            "data": data,
+            "mismatch" : 2
+        }
+    
+    except Exception as e:
+        return {
+        "status": False,
+        "message": str(e)
+    }
+
+
+@router.get("/get_document/{doc_type}/{user_id}")
+def get_document(
+    doc_type : str,
+    user_id :int,
+    db: Session = Depends(get_db)):
+    try:
+   
+        data = service_document.get_document_by_user(db,doc_type,user_id)
+       
+
+        return {
+            "success": True,
+            "data": data,
+        }
+    
+    except Exception as e:
+        return {
+        "status": False,
+        "message": str(e)
+    }
+
+
+@router.post("/edit_document/{user_id}")
+def edit_document(
+    data: dict,
+    user_id :int, 
+    db: Session = Depends(get_db)):
+    try:
+   
+        result = service_document.edit_document(db,user_id, data)
+    
+        return {
+            "success": True,
+            "data": result
+        }
+    
+    except Exception as e:
+        return {
+        "status": False,
+        "message": str(e)
+    }

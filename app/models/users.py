@@ -1,5 +1,6 @@
 from sqlalchemy import text
 from sqlalchemy.orm import Session
+from app.entities.users import User
 
 
 def get_all_users(db: Session):
@@ -37,5 +38,7 @@ def get_user_by_id(db: Session, user_id: int):
                 "user_id": user_id
             }).mappings().first()
 
+def get_user_by_id_all_data(db:Session,username:str):
 
+    return db.query(User).filter(User.username == username).first()
 
