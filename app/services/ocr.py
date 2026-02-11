@@ -8,7 +8,7 @@ from app.ocr.document.house_registration import process_house_registration_image
 
 DOC_HANDLERS: Dict[str, Callable[[UploadFile], Awaitable[dict]]] = {
     "thai_id": process_thai_id_image,
-    "driving_license" : process_driving_license,
+    "driving_licence" : process_driving_license,
     "passport" : process_passport_image,
     "house_registration" : process_house_registration_image
 }

@@ -25,7 +25,7 @@ class Passport(Base):
 
     nationality = Column(String(50), nullable=False)
 
-    identification_no = Column(String(13), nullable=False)
+    citizen_id = Column(String(13), nullable=False)
 
     birthday = Column(Date, nullable=False)
 

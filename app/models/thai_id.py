@@ -22,21 +22,15 @@ def add_thai_id(db: Session, data: dict) -> ThaiID:
         db.rollback()
         raise ValueError("Citizen ID already exists")
     
-    from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from app.entities.thai_id import ThaiID
-
 
 def edit_thai_id(db: Session, user_id: int, data: dict) -> bool:
 
-    # 1) ค้นหาข้อมูลเดิม
     thai_id = db.query(ThaiID).filter_by(user_id=user_id).first()
 
     if not thai_id:
         raise ValueError("ThaiID not found")
 
     try:
-        # 2) อัปเดตฟิลด์ทีละตัว
         for key, value in data.items():
             setattr(thai_id, key, value)
 
