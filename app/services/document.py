@@ -14,6 +14,10 @@ import app.models.house_registration as model_house_registration
 
 from app.views.formatter import format
 
+from app.helper.help_format_thai_id import format_thai_id
+from app.helper.help_format_driving_licence import format_driving_licence
+from app.helper.help_format_passport import format_passport
+from app.helper.help_format_house_registration import format_house_registration
 
 SCHEMA_MAP = {
     "thai_id": ThaiIDCreate,
@@ -163,7 +167,7 @@ def check_document_mismatch(db, user_id: int):
             blocks[name] = to_dict(val)
 
     if len(blocks) <= 1:
-        return 0
+        return {}
 
     FIELD_MAP = {
         "citizen_id": {
@@ -321,3 +325,19 @@ def edit_check_document(db,field, value,user_id):
             data_e = model_driving_licence.edit_driving_licence(db,id,data_driving_licence_in)
 
     return data_e
+
+def get_all_document_format(db,user_id : int):
+
+    data = {}
+
+    data_thai = model_thai_id.get_thai_id_by_user(db,user_id)
+    data_driving_licence = model_driving_licence.get_driving_licence_by_user(db,user_id)
+    data_passport = model_passport.get_passport_by_user(db,user_id)
+    data_house_registration= model_house_registration.get_house_registration_by_user(db,user_id)
+
+    data["data_thai"] = format_thai_id(data_thai)
+    data["data_driving_licence"] = format_driving_licence(data_driving_licence)
+    data["data_passport"] = format_passport(data_passport)
+    data["data_house_registration"] = format_house_registration(data_house_registration)
+ 
+    return data

@@ -16,7 +16,7 @@ class PassportData(BaseModel):
 
     country_code: str = Field(min_length=3,max_length=3,)
 
-    passport_no: str = Field(min_length=9, max_length=9)  
+    passport_no: str
 
     prefix_name_th: str
     first_name_th: str
@@ -28,10 +28,7 @@ class PassportData(BaseModel):
 
     nationality: str
 
-    citizen_id: str = Field(
-        min_length=13,
-        max_length=13,
-    )
+    citizen_id: str 
 
     birthday: date
 

@@ -181,3 +181,23 @@ def edit_check_document(
         "status": False,
         "message": str(e)
     }
+
+@router.get("/get_all_document_format/{user_id}")
+def get_all_document_format(
+    user_id :int, 
+    db: Session = Depends(get_db)):
+    try:
+   
+        data = service_document.get_all_document_format(db,user_id)
+
+        return {
+            "success": True,
+            "data": data,
+        }
+    
+    except Exception as e:
+        return {
+        "status": False,
+        "message": str(e)
+    }
+

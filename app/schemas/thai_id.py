@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import date
 
 class ThaiIDData(BaseModel):
-    citizen_id: str = Field(min_length=13, max_length=13)  
+    citizen_id: str 
     
     prefix_name_th: str
     first_name_th: str

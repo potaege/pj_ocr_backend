@@ -1,3 +1,5 @@
+import re
+
 def check_height(text: str):
     if not isinstance(text, str):
         return "", False
@@ -8,12 +10,11 @@ def check_height(text: str):
     t = t.replace(",", ".")
     t = t.replace("I", "1")
 
-    import re
-    pattern = r'^[0-2]\.\d{2}\s?M$'
+    t = re.sub(r'[^0-9]', '', t)
 
-    if re.match(pattern, t):
-        value = float(t.replace("M", "").strip()) # ความสูงประเทศไทยใช้หน่วยเป็นเมตร (M)
-        if 0.50 <= value <= 2.50:
-            return t, True
+    test = int(t)
 
-    return t, False
+    if 50 <= test <= 250:
+        return str(test) , True
+
+    return str(test), False

@@ -20,7 +20,7 @@ def add_passport(db: Session, data: dict) -> Passport:
     
     except IntegrityError:
         db.rollback()
-        raise ValueError("passport already exists")
+        raise ValueError(f"duplicate key: {e.orig}")
     
 def edit_passport(db: Session, user_id: int, data: dict) -> bool:
 

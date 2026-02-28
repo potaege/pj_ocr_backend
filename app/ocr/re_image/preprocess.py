@@ -5,14 +5,12 @@ import os
 def resize_image(image_bgr, width=1280, height=800, keep_ratio=True):
     h, w = image_bgr.shape[:2]
 
-    # ถ้าขนาดตรงแล้ว ไม่ resize ซ้ำ
     if w == width and h == height:
         return image_bgr
 
     if not keep_ratio:
         return cv2.resize(image_bgr, (width, height))
 
-    # --- keep ratio + pad ---
     scale = min(width / w, height / h)
     new_w, new_h = int(w * scale), int(h * scale)
 
@@ -37,22 +35,20 @@ def bg_anycolor_to_white_keep_text(bgr):
 
     gray = cv2.cvtColor(bgr, cv2.COLOR_BGR2GRAY)
 
-    # ลดนอยส์ก่อน เพื่อให้ threshold เสถียร
     gray_blur = cv2.GaussianBlur(gray, (3, 3), 0)
 
-    # ดึง "ตัวอักษร" ออกมาแบบ adaptive (ทนต่อพื้นหลังหลายสี/ไล่เฉด)
+    
     th = cv2.adaptiveThreshold(
         gray_blur, 255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
         cv2.THRESH_BINARY_INV,
-        31,  # ปรับได้: 21/31/41
-        7    # ปรับได้: 5-15
+        31,  
+        7    
     )
 
     kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (2, 2))
     th = cv2.morphologyEx(th, cv2.MORPH_OPEN, kernel, iterations=1)
 
-    # สร้างภาพพื้นหลังขาว แล้วแปะเฉพาะส่วนตัวอักษรกลับเข้าไป
     out = np.full_like(bgr, 255)
     out[th > 0] = bgr[th > 0]
 
